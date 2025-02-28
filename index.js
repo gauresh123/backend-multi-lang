@@ -28,8 +28,6 @@ const loadTranslation = (lang) => {
   }
 };
 
-loadTranslation("vi");
-
 app.get("/api/translations/:lng", (req, res) => {
   const { lng } = req?.params;
 
