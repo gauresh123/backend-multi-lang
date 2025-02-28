@@ -1,0 +1,11 @@
+{
+    "login": {
+      "welcome": "Cổng phân phối Chào mừng",
+      "mobileno": "Đăng nhập bằng Số điện thoại",
+      "userid": "Đăng nhập bằng Mã người dùng",
+      "forgetPass": "Quên mật khẩu?",
+      "donthaveaccount": "Chưa có tài khoản? Đăng ký",
+      "clientlogin": "Đăng nhập khách hàng",
+      "firststape": "Hãy bước đi đầu tiên trên con đường trở nên giàu có."
+    } 
+}
