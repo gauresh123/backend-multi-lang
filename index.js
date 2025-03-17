@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
 import { fileURLToPath } from "url";
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { join } from "path";
+import dotenv from "dotenv/config";
 
 const app = express();
 const PORT = "8000";
@@ -11,6 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
+// console.log(process.env.DEFAULT_LANG,"language");
 
 const loadTranslation = (lang) => {
   let filePath;
@@ -21,8 +24,12 @@ const loadTranslation = (lang) => {
     return translations;
   } catch (err) {
     console.error(err);
+
     const defaultTranslations = JSON.parse(
-      readFileSync(join(__dirname, "translations", "en.json"), "utf8")
+      readFileSync(
+        join(__dirname, "translations", `${process.env.DEFAULT_LANG}.json`),
+        "utf8"
+      )
     );
     return defaultTranslations;
   }
@@ -30,9 +37,12 @@ const loadTranslation = (lang) => {
 
 app.get("/api/translations/:lng", (req, res) => {
   const { lng } = req?.params;
-
   const translations = loadTranslation(lng);
   return res.json(translations);
+});
+
+app.get("/api/lng", (req, res) => {
+  return res.json({ lng: "id" });
 });
 
 app.listen(PORT, () => {
